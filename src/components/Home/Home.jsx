@@ -9,6 +9,7 @@ import Poster from "../Poster/Poster";
 import Products from "../Products/Products";
 
 const Home = () => {
+  
   const dispatch = useDispatch();
   const {
     products: { list, filtered },
@@ -18,16 +19,15 @@ const Home = () => {
   useEffect(() => {
     if (!list.length) return;
 
-    dispatch(filterByPrice(100));
-  }, [dispatch, list.length]);
+    dispatch(filterByPrice(2019));
+  }, [dispatch, list.length]); 
 
   return (
     <>
       <Poster />
       <Products products={list} amount={5} title="Trending" />
-      <Categories products={categories.list} amount={5} title="Worth seeing" />
-      <Banner />
-      <Products products={filtered} amount={5} title="Less than 100$" />
+       <Categories products={categories.list} amount={5} title="Worth seeing" />
+       <Products products={filtered} amount={5} title="Less than 100$" /> 
     </>
   );
 };

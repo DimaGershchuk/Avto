@@ -3,10 +3,10 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 
 export const getCategories = createAsyncThunk(
-  "categories/getCategories",
+  "type/getCategories",
   async (_, thunkAPI) => {
     try {
-      const res = await axios(`${BASE_URL}/categories`);
+      const res = await axios(`${BASE_URL}/type`);
       return res.data;
     } catch (err) {
       console.log(err);

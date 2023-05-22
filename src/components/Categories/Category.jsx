@@ -13,13 +13,13 @@ const Category = () => {
   const { list } = useSelector(({ categories }) => categories);
 
   const defaultValues = {
-    title: "",
+    mark: "",
     price_min: 0,
     price_max: 0,
   };
 
   const defaultParams = {
-    categoryId: id,
+    type_id: id,
     limit: 5,
     offset: 0,
     ...defaultValues,
@@ -39,7 +39,7 @@ const Category = () => {
     setValues(defaultValues);
     setItems([]);
     setEnd(false);
-    setParams({ ...defaultParams, categoryId: id });
+    setParams({ ...defaultParams, type_id: id });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -88,7 +88,7 @@ const Category = () => {
             name="title"
             onChange={handleChange}
             placeholder="Product name"
-            value={values.title}
+            value={values.type}
           />
         </div>
         <div className={styles.filter}>

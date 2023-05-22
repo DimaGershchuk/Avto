@@ -5,10 +5,10 @@ import { BASE_URL } from "../../utils/constants";
 import { shuffle } from "../../utils/common";
 
 export const getProducts = createAsyncThunk(
-  "products/getProducts",
+  "auto/getProducts",
   async (_, thunkAPI) => {
     try {
-      const res = await axios(`${BASE_URL}/products`);
+      const res = await axios(`${BASE_URL}/auto`);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -25,15 +25,15 @@ const productsSlice = createSlice({
     related: [],
     isLoading: false,
   },
-  reducers: {
-    filterByPrice: (state, { payload }) => {
-      state.filtered = state.list.filter(({ price }) => price < payload);
+   reducers: {
+   filterByPrice: (state, { payload }) => {
+     state.filtered = state.list.filter(({ year }) => year < payload);
     },
-    getRelatedProducts: (state, { payload }) => {
-      const list = state.list.filter(({ category: { id } }) => id === payload);
-      state.related = shuffle(list);
-    },
-  },
+     getRelatedProducts: (state, { payload }) => {
+      const list = state.list.filter(({ type_id: { id } }) => id === payload);
+     state.related = shuffle(list);
+   },
+   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {
       state.isLoading = true;

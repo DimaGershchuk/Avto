@@ -3,10 +3,10 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 
 export const createUser = createAsyncThunk(
-  "users/createUser",
+  "user/createUser",
   async (payload, thunkAPI) => {
     try {
-      const res = await axios.post(`${BASE_URL}/users`, payload);
+      const res = await axios.post(`${BASE_URL}/user`, payload);
       return res.data;
     } catch (err) {
       console.log(err);

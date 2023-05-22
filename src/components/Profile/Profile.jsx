@@ -10,10 +10,9 @@ const Profile = () => {
   const { currentUser } = useSelector(({ user }) => user);
 
   const [values, setValues] = useState({
-    name: "",
+    first_name: "",
     email: "",
     password: "",
-    avatar: "",
   });
 
   useEffect(() => {
@@ -72,18 +71,6 @@ const Profile = () => {
               placeholder="Your password"
               name="password"
               value={values.password}
-              autoComplete="off"
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className={styles.group}>
-            <input
-              type="avatar"
-              placeholder="Your avatar"
-              name="avatar"
-              value={values.avatar}
               autoComplete="off"
               onChange={handleChange}
               required

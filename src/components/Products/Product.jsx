@@ -5,24 +5,24 @@ import { useDispatch } from "react-redux";
 import { ROUTES } from "../../utils/routes";
 
 import styles from "../../styles/Product.module.css";
+import AVATAR from "../../images/bmw.jpeg";
 
 import { addItemToCart } from "../../features/user/userSlice";
 
-const SIZES = [4, 4.5, 5];
 
 const Product = (item) => {
-  const { title, price, images, description } = item;
+  const { mark, price, color, model, description, year, engine } = item;
 
   const dispatch = useDispatch();
 
   const [currentImage, setCurrentImage] = useState();
   const [currentSize, setCurrentSize] = useState();
 
-  useEffect(() => {
-    if (!images.length) return;
+  // useEffect(() => {
+  //   if (!images.length) return;
 
-    setCurrentImage(images[0]);
-  }, [images]);
+  //   setCurrentImage(images[0]);
+  // }, [images]);
 
   const addToCart = () => {
     dispatch(addItemToCart(item));
@@ -33,9 +33,9 @@ const Product = (item) => {
       <div className={styles.images}>
         <div
           className={styles.current}
-          style={{ backgroundImage: `url(${currentImage})` }}
+          style={{ backgroundImage: `url(${AVATAR})` }}
         />
-        <div className={styles["images-list"]}>
+       {/* <div className={styles["images-list"]}>
           {images.map((image, i) => (
             <div
               key={i}
@@ -44,32 +44,17 @@ const Product = (item) => {
               onClick={() => setCurrentImage(image)}
             />
           ))}
-        </div>
+        </div> */}
       </div>
       <div className={styles.info}>
-        <h1 className={styles.title}>{title}</h1>
-        <div className={styles.price}>{price}$</div>
-        <div className={styles.color}>
-          <span>Color:</span> Green
+        <h1 className={styles.title}>{mark}</h1>
+        <h1 className={styles.title}>{model}</h1>
+        <div className={styles.price}>Ціна : {price}$</div>
+        <div className={styles.price}>Рік випуску : {year}</div>
+        <div className={styles.price}>Об'єм двигуна : {engine}</div>
+        <div className={styles.price}>
+          <span>Color:</span> {color}
         </div>
-        <div className={styles.sizes}>
-          <span>Sizes:</span>
-
-          <div className={styles.list}>
-            {SIZES.map((size) => (
-              <div
-                onClick={() => setCurrentSize(size)}
-                className={`${styles.size} ${
-                  currentSize === size ? styles.active : ""
-                }`}
-                key={size}
-              >
-                {size}
-              </div>
-            ))}
-          </div>
-        </div>
-
         <p className={styles.description}>{description}</p>
 
         <div className={styles.actions}>
