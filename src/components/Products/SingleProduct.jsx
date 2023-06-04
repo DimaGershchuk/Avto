@@ -25,11 +25,11 @@ const SingleProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isFetching, isSuccess]);
 
-  useEffect(() => {
-    if (!data || !list.length) return;
+  // useEffect(() => {
+  //   if (!data || !list.length) return;
 
-    dispatch(getRelatedProducts(data.type_id.id));
-  }, [data, dispatch, list.length]);
+  //   dispatch(getRelatedProducts(data.type_id.id));
+  // }, [data, dispatch, list.length]);
 
   return !data ? (
     <section className="preloader">Loading...</section>

@@ -4,4 +4,6 @@ export const ROUTES = {
   PROFILE: "/profile",
   PRODUCT: "/auto/:id",
   CATEGORY: "/type/:id",
+  POSTAUTO : "/postauto",
+  MAILFORM : "/mailform"
 };

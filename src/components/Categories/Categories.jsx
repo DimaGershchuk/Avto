@@ -12,11 +12,11 @@ const Categories = ({ type, products = [], amount }) => {
       <h2>{type}</h2>
 
       <div className={styles.list}>
-        {list.map(({ id, type_id, type, link }) => (
-          <Link to={`/type/${type_id}`} key={type_id} className={styles.item}>
+        {list.map(({ id, type_id, image, type, link }) => (
+          <Link to={`/type/${id}`} key={id} className={styles.item}>
             <div
               className={styles.image}
-              style={{ backgroundImage: `url(${BMW})` }}
+              style={{ backgroundImage: `url(${image})` }}
             />
             
             <h3 className={styles.title}>{type}</h3>

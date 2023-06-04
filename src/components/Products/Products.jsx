@@ -11,12 +11,12 @@ const Products = ({ mark, style = {}, products = [], amount }) => {
       {mark && <h2>{mark}</h2>}
 
       <div className={styles.list}>
-        {list.map(({auto_id, mark, model, id, type_id,  price }) => (
+        {list.map(({auto_id, mark, model, id, image, type_id,  price }) => (
           <Link to={`/auto/${auto_id}`} key={auto_id} className={styles.product}>
-             {/* <div
+         <div
               className={styles.image}
-              style={{ backgroundImage: `url(${image[0]})` }}
-            /> */}
+              style={{ backgroundImage: `url(${image})` }}
+            />
 
             <div className={styles.wrapper}>
               <h3 className={styles.title}>{mark}</h3>

@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL2 } from "../../utils/constants";
 
 export const createUser = createAsyncThunk(
-  "user/createUser",
+  "users/createUser",
   async (payload, thunkAPI) => {
     try {
-      const res = await axios.post(`${BASE_URL}/user`, payload);
+      const res = await axios.post(`${BASE_URL2}/users`, payload);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -19,8 +19,8 @@ export const loginUser = createAsyncThunk(
   "users/loginUser",
   async (payload, thunkAPI) => {
     try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, payload);
-      const login = await axios(`${BASE_URL}/auth/profile`, {
+      const res = await axios.post(`${BASE_URL2}/auth/login`, payload);
+      const login = await axios(`${BASE_URL2}/auth/profile`, {
         headers: {
           Authorization: `Bearer ${res.data.access_token}`,
         },
@@ -38,7 +38,7 @@ export const updateUser = createAsyncThunk(
   "users/updateUser",
   async (payload, thunkAPI) => {
     try {
-      const res = await axios.put(`${BASE_URL}/users/${payload.id}`, payload);
+      const res = await axios.put(`${BASE_URL2}/users/${payload.id}`, payload);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -63,11 +63,11 @@ const userSlice = createSlice({
   reducers: {
     addItemToCart: (state, { payload }) => {
       let newCart = [...state.cart];
-      const found = state.cart.find(({ id }) => id === payload.id);
+      const found = state.cart.find(({ auto_id }) => auto_id === payload.id);
 
       if (found) {
         newCart = newCart.map((item) => {
-          return item.id === payload.id
+          return item.auto_id === payload.auto_id
             ? { ...item, quantity: payload.quantity || item.quantity + 1 }
             : item;
         });
@@ -76,7 +76,7 @@ const userSlice = createSlice({
       state.cart = newCart;
     },
     removeItemFromCart: (state, { payload }) => {
-      state.cart = state.cart.filter(({ id }) => id !== payload);
+      state.cart = state.cart.filter(({ auto_id }) => auto_id !== payload);
     },
     toggleForm: (state, { payload }) => {
       state.showForm = payload;

@@ -14,11 +14,12 @@ import BMW from "../../images/catbmw.jpg";
 import { toggleForm } from "../../features/user/userSlice";
 import { useGetProductsQuery } from "../../features/api/apiSlice";
 
+
 const Header = () => {
   const dispatch = useDispatch();
 
   const [searchValue, setSearchValue] = useState("");
-  const {currentUser} = useSelector(({user}) => user)
+  const {currentUser, cart} = useSelector(({user}) => user)
 
   const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
 
@@ -33,6 +34,7 @@ const Header = () => {
   const handleClick = () => {
     if(!currentUser) dispatch(toggleForm(true))
   }
+  
   const handleSearch = ({ target: { value } }) => {
     setSearchValue(value);
   };
@@ -44,10 +46,14 @@ const Header = () => {
           <img src={LOGO} alt="Stuff" />
         </Link>
       </div>
-
+      <Link to = {ROUTES.POSTAUTO}>
+      <button className={styles.button}>
+             Додати оголошення
+           </button>
+           </Link>
        <div className={styles.info}>
         <div className={styles.user} onClick={handleClick}>
-       <div className={styles.avatar} style={{ backgroundImage: `url(${AVATAR})` }} />
+       <div className={styles.avatar} style={{ backgroundImage: `url(${values.avatar})` }} />
        <div className={styles.username}>{values.name}</div>
         </div>
         <form className={styles.form}>
@@ -56,6 +62,9 @@ const Header = () => {
               <use xlinkHref={`${process.env.PUBLIC_URL}/sprite.svg#search`} />
             </svg>
           </div>
+
+         
+
           <div className={styles.input}>
             <input
               type="search"
@@ -71,7 +80,7 @@ const Header = () => {
                 ? "Loading"
                 : !data.length
                 ? "No results"
-                : data.map(({ mark, model, price, auto_id,id}) => {
+                : data.map(({ mark, model, price, image, auto_id,id}) => {
                     return (
                       <Link
                         key={auto_id}
@@ -81,7 +90,7 @@ const Header = () => {
                       >
                         <div
                           className={styles.image}
-                          style={{ backgroundImage: `url(${BMW})` }}
+                          style={{ backgroundImage: `url(${image})` }}
                         />
                         <div className={styles.title}>{mark}</div>
                          <div className={styles.title}>{model}</div>
@@ -89,20 +98,29 @@ const Header = () => {
                     );
                   })}
             </div>
+            
           )}
           </div>
           </form>
           <div className={styles.account}>
-          <Link to={ROUTES.HOME} className={styles.favourites}>
+          {/* <Link to={ROUTES.HOME} className={styles.favourites}>
             <svg className={styles["icon-fav"]}>
               <use xlinkHref={`${process.env.PUBLIC_URL}/sprite.svg#heart`} />
             </svg>
+          </Link> */}
+          <Link to={ROUTES.CART} className={styles.cart}>
+            <svg className={styles["icon-fav"]}>
+              <use xlinkHref={`${process.env.PUBLIC_URL}/sprite.svg#heart`} />
+            </svg>
+            {!!cart.length && (
+              <span className={styles.count}>{cart.length}</span>
+            )}
           </Link>
         </div>
         </div>
         </div>
-      
-    
+        
+  
          
   );
 };

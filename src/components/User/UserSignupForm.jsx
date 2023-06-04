@@ -7,9 +7,10 @@ import styles from "../../styles/User.module.css";
 const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
   const dispatch = useDispatch();
   const [values, setValues] = useState({
-    first_name: "",
-    password: "",
+    name: "",
     email: "",
+    password: "",
+    avatar: "",
   });
 
   const handleChange = ({ target: { value, name } }) => {
@@ -40,10 +41,22 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.group}>
           <input
+            type="email"
+            placeholder="Your email"
+            name="email"
+            value={values.email}
+            autoComplete="off"
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className={styles.group}>
+          <input
             type="name"
             placeholder="Your name"
             name="name"
-            value={values.first_name}
+            value={values.name}
             autoComplete="off"
             onChange={handleChange}
             required
@@ -62,12 +75,12 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
           />
         </div>
 
-        <div className={styles.group}>
+         <div className={styles.group}>
           <input
-            type="email"
-            placeholder="Your email"
-            name="email"
-            value={values.email}
+            type="avatar"
+            placeholder="Your avatar"
+            name="avatar"
+            value={values.avatar}
             autoComplete="off"
             onChange={handleChange}
             required

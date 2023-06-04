@@ -23,6 +23,11 @@
   cursor: pointer;
 }
 
+.button {
+  margin-right: 30px;
+}
+
+
 .avatar {
   width: 36px;
   height: 36px;
@@ -65,6 +70,8 @@
 .input {
   flex-grow: 1;
 }
+
+
 
 .input input {
   font-family: Montserrat, Roboto, sans-serif;

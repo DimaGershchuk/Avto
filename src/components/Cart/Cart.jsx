@@ -4,9 +4,10 @@ import {
   addItemToCart,
   removeItemFromCart,
 } from "../../features/user/userSlice";
-
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/Cart.module.css";
 import { sumBy } from "../../utils/common";
+import { ROUTES } from "../../utils/routes";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -16,13 +17,13 @@ const Cart = () => {
     dispatch(addItemToCart({ ...item, quantity }));
   };
 
-  const removeItem = (id) => {
-    dispatch(removeItemFromCart(id));
+  const removeItem = (auto_id) => {
+    dispatch(removeItemFromCart(auto_id));
   };
 
   return (
     <section className={styles.cart}>
-      <h2 className={styles.title}>Your cart</h2>
+      <h2 className={styles.title}>Your favourites</h2>
 
       {!cart.length ? (
         <div className={styles.empty}>Here is empty</div>
@@ -30,17 +31,17 @@ const Cart = () => {
         <>
           <div className={styles.list}>
             {cart.map((item) => {
-              const { title, category, images, price, id, quantity } = item;
+              const { mark, model, type_id, image, price, auto_id, quantity } = item;
 
               return (
-                <div className={styles.item} key={id}>
+                <div className={styles.item} key={auto_id}>
                   <div
                     className={styles.image}
-                    style={{ backgroundImage: `url(${images[0]})` }}
+                    style={{ backgroundImage: `url(${image})` }}
                   />
                   <div className={styles.info}>
-                    <h3 className={styles.name}>{title}</h3>
-                    <div className={styles.category}>{category.name}</div>
+                    <h3 className={styles.name}>{mark}</h3>
+                    <div className={styles.category}>{type_id}</div>
                   </div>
 
                   <div className={styles.price}>{price}$</div>
@@ -79,7 +80,7 @@ const Cart = () => {
 
                   <div
                     className={styles.close}
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeItem(item.auto_id)}
                   >
                     <svg className="icon">
                       <use
@@ -99,9 +100,11 @@ const Cart = () => {
                 {sumBy(cart.map(({ quantity, price }) => quantity * price))}$
               </span>
             </div>
-
-            <button className={styles.proceed}>Proceed to checkout</button>
+            <Link to = {ROUTES.MAILFORM}>
+            <button className={styles.proceed}>Buy car</button>
+          </Link>
           </div>
+          
         </>
       )}
     </section>

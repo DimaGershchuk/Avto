@@ -11,18 +11,14 @@ import { addItemToCart } from "../../features/user/userSlice";
 
 
 const Product = (item) => {
-  const { mark, price, color, model, description, year, engine } = item;
+  const { mark, price, color, model, image, description, year, engine } = item;
 
   const dispatch = useDispatch();
 
   const [currentImage, setCurrentImage] = useState();
   const [currentSize, setCurrentSize] = useState();
 
-  // useEffect(() => {
-  //   if (!images.length) return;
-
-  //   setCurrentImage(images[0]);
-  // }, [images]);
+  
 
   const addToCart = () => {
     dispatch(addItemToCart(item));
@@ -33,9 +29,9 @@ const Product = (item) => {
       <div className={styles.images}>
         <div
           className={styles.current}
-          style={{ backgroundImage: `url(${AVATAR})` }}
+          style={{ backgroundImage: `url(${image})` }}
         />
-       {/* <div className={styles["images-list"]}>
+        {/* <div className={styles["images-list"]}>
           {images.map((image, i) => (
             <div
               key={i}
@@ -43,8 +39,8 @@ const Product = (item) => {
               style={{ backgroundImage: `url(${image})` }}
               onClick={() => setCurrentImage(image)}
             />
-          ))}
-        </div> */}
+          ))} */}
+        {/* </div>  */}
       </div>
       <div className={styles.info}>
         <h1 className={styles.title}>{mark}</h1>
@@ -61,11 +57,10 @@ const Product = (item) => {
           <button
             onClick={addToCart}
             className={styles.add}
-            disabled={!currentSize}
           >
-            Add to cart
+            Add to favourites
           </button>
-          <button className={styles.favourite}>Add to favourites</button>
+          {/* <button className={styles.favourite}>Add to favourites</button> */}
         </div>
 
         <div className={styles.bottom}>

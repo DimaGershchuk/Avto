@@ -17,6 +17,8 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -27,18 +29,19 @@ const productsSlice = createSlice({
   },
    reducers: {
    filterByPrice: (state, { payload }) => {
-     state.filtered = state.list.filter(({ year }) => year < payload);
+     state.filtered = state.list.filter(({ price }) => price < payload);
     },
-     getRelatedProducts: (state, { payload }) => {
-      const list = state.list.filter(({ type_id: { id } }) => id === payload);
-     state.related = shuffle(list);
-   },
-   },
+  //    getRelatedProducts: (state, { payload }) => {
+  //     const list = state.list.filter(({ type_id: { id } }) => id === payload);
+  //    state.related = shuffle(list);
+  //  },
+  },
+   
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getProducts.fulfilled, (state, { payload }) => {
+    builder.addCase(getProducts.fulfilled,  (state, { payload }) => {
       state.list = payload;
       state.isLoading = false;
     });
@@ -46,8 +49,9 @@ const productsSlice = createSlice({
       state.isLoading = false;
     });
   },
+
 });
 
-export const { filterByPrice, getRelatedProducts } = productsSlice.actions;
+export const { filterByPrice, getRelatedProducts} = productsSlice.actions;
 
 export default productsSlice.reducer;
