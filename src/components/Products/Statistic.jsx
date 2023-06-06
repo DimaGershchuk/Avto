@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {useSelector} from "react-redux";
+import AVATAR from "../../images/avatar.jpg";
+import styles from "../../styles/Header.module.css";
 
 const CarStatistics = () => {
     const [cars, setCars] = useState([]);

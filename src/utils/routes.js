@@ -6,5 +6,6 @@ export const ROUTES = {
   CATEGORY: "/type/:id",
   POSTAUTO : "/postauto",
   MAILFORM : "/mailform",
-  STATS: "/stats"
+  STATS: "/stats",
+  MYPRODUCTS: "/myproducts"
 };

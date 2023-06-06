@@ -46,11 +46,20 @@ const Header = () => {
           <img src={LOGO} alt="Stuff" />
         </Link>
       </div>
-      <Link to = {ROUTES.POSTAUTO}>
-      <button className={styles.button}>
-             Додати оголошення
-           </button>
-           </Link>
+        {values.name !== "Guest" && (
+            <Link to = {ROUTES.POSTAUTO}>
+                <button className={styles.button}>
+                    Додати оголошення
+                </button>
+            </Link>
+        )}
+        {values.name !== "Guest" && (
+            <Link to = {ROUTES.MYPRODUCTS}>
+                <button className={styles.button}>
+                    Перегляд оголошень
+                </button>
+            </Link>
+        )}
         <Link to = {ROUTES.STATS}>
             <button className={styles.button}>
                 Статистика

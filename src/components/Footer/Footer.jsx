@@ -15,7 +15,7 @@ const Footer = () => (
     </div>
 
     <div className={styles.rights}>
-      Developed by Dima
+      Developed by Dima & Igor
     </div>
 
     <div className={styles.socials}>

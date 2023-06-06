@@ -5,8 +5,18 @@ import axios from "axios";
 import styles from "../../styles/PostProduct.css";
 
 import { ROUTES } from "../../utils/routes";
+import AVATAR from "../../images/avatar.jpg";
 
 const AddCarForm = () => {
+    const {currentUser, cart} = useSelector(({user}) => user)
+    const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+
+    useEffect(() => {
+        if (!currentUser) return;
+
+        setValues(currentUser);
+    }, [currentUser]);
+
     const [carData, setCarData] = useState({
       mark: "",
       model: "",
@@ -17,7 +27,9 @@ const AddCarForm = () => {
       image : "",
       color : "",
       description: "",
+      user_id: currentUser.id
     });
+
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -45,6 +57,7 @@ const AddCarForm = () => {
           color : "",
           image : "",
           description: "",
+          user_id: currentUser.id
         });
       } catch (error) {
         console.error(error);
@@ -53,7 +66,6 @@ const AddCarForm = () => {
   
     return (
       <form className={styles.form} onSubmit={handleSubmit}>
-        
         <label className={styles.label}>
           Марка:
           <input className={styles.input}
