@@ -10,6 +10,7 @@ import SingleCategory from "../Categories/SingleCategory";
 import Cart from "../Cart/Cart";
 import PostProduct from "../Products/PostProduct";
 import MailForm from "../Products/MailForm";
+import Statistic from "../Products/Statistic";
 
 const AppRoutes = () => (
   <Routes>
@@ -19,6 +20,7 @@ const AppRoutes = () => (
     <Route path={ROUTES.CATEGORY} element={<SingleCategory />} />
     <Route path={ROUTES.CART} element={<Cart />} />
     <Route path={ROUTES.POSTAUTO} element={<PostProduct/>} />
+    <Route path={ROUTES.STATS} element={<Statistic/>} />
     <Route path={ROUTES.MAILFORM} element={<MailForm/>} />
   </Routes>
 );

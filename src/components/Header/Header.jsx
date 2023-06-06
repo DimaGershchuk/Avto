@@ -51,6 +51,11 @@ const Header = () => {
              Додати оголошення
            </button>
            </Link>
+        <Link to = {ROUTES.STATS}>
+            <button className={styles.button}>
+                Статистика
+            </button>
+        </Link>
            {/* <Link to = {ROUTES.MAILFORM}>
             <button className={styles.button}>Register</button>
           </Link> */}
