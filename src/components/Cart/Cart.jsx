@@ -21,6 +21,12 @@ const Cart = () => {
     dispatch(removeItemFromCart(auto_id));
   };
 
+  const handleBuyCar = () => {
+    const autoIds = cart.map((item) => item.auto_id);
+    const url = `https://t.me/CarSe11erBot?start=${autoIds.join(",")}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <section className={styles.cart}>
       <h2 className={styles.title}>Your favourites</h2>
@@ -31,7 +37,7 @@ const Cart = () => {
         <>
           <div className={styles.list}>
             {cart.map((item) => {
-              const { mark, model, type_id, image, price, auto_id, quantity } = item;
+              const { mark, model, type_id, image, price, quantity, auto_id } = item;
 
               return (
                 <div className={styles.item} key={auto_id}>
@@ -80,7 +86,7 @@ const Cart = () => {
 
                   <div
                     className={styles.close}
-                    onClick={() => removeItem(item.auto_id)}
+                    onClick={() => removeItem(auto_id)}
                   >
                     <svg className="icon">
                       <use
@@ -100,11 +106,10 @@ const Cart = () => {
                 {sumBy(cart.map(({ quantity, price }) => quantity * price))}$
               </span>
             </div>
-            <Link to = {ROUTES.MAILFORM}>
-            <button className={styles.proceed}>Buy car</button>
-          </Link>
+            <button className={styles.proceed} onClick={handleBuyCar}>
+              Buy car
+            </button>
           </div>
-          
         </>
       )}
     </section>

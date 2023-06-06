@@ -1,57 +1,123 @@
-import React, { useState } from "react";
-import axios from "axios";
-import styles from "../../styles/PostProduct.css";
-import { BASE_URL } from "../../utils/constants";
-const MailForm = () => {
-  const [formData, setFormData] = useState({
-    mark: "",
-    model: "",
-  });
+import React, { useState } from 'react';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
+const AuthForm = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [userExists, setUserExists] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await axios.post(`${BASE_URL}/send-email`, formData);
-      console.log("Email sent successfully");
-      // Додайте код для відображення підтвердження надсилання листа
-    } catch (error) {
-      console.error("Error sending email", error);
-      // Додайте код для відображення помилки надсилання листа
+
+    if (isRegistering) {
+      // Перевірити, чи користувач уже існує
+      if (userExists) {
+        console.log('Користувач уже існує');
+        return;
+      }
+
+      // Виконати логіку для реєстрації користувача
+      console.log('Реєстрація:', firstName, lastName, email, password);
+
+      // Скидання значень полів після реєстрації
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+
+      // Встановлення флагу авторизації
+      setIsLoggedIn(true);
+    } else {
+      // Виконати логіку для авторизації користувача
+      console.log('Авторизація:', email, password);
+
+      // Скидання значень полів після авторизації
+      setEmail('');
+      setPassword('');
+
+      // Встановлення флагу авторизації
+      setIsLoggedIn(true);
     }
   };
 
+  if (isLoggedIn) {
+    return (
+      <div>
+        <h2>Привіт, {firstName} {lastName}!</h2>
+      </div>
+    );
+  }
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.label}>
-        Mark:
-        <input
-          className={styles.input}
-          type="text"
-          name="mark"
-          value={formData.mark}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Model:
-        <input
-          type="text"
-          name="model"
-          value={formData.model}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit">Додати</button>
-    </form>
+    <div>
+      <h2>{isRegistering ? 'Реєстрація' : 'Авторизація'}</h2>
+      {userExists && <p>Користувач уже існує</p>}
+      <form onSubmit={handleSubmit}>
+        <label>
+          Ім'я:
+          <input
+            type="text"
+            value={firstName}
+            onChange={handleFirstNameChange}
+            required
+          />
+        </label>
+        <label>
+          Прізвище:
+          <input
+            type="text"
+            value={lastName}
+            onChange={handleLastNameChange}
+            required
+          />
+        </label>
+        <label>
+          Електронна пошта:
+          <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </label>
+        <label>
+          Пароль:
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </label>
+        <button type="submit">{isRegistering ? 'Зареєструватися' : 'Увійти'}</button>
+      </form>
+      <p>
+        {isRegistering ? "Маєте обліковий запис?" : "Не маєте облікового запису?"}{' '}
+        <button onClick={() => setIsRegistering(!isRegistering)}>
+          {isRegistering ? 'Увійти' : 'Зареєструватися'}
+        </button>
+      </p>
+    </div>
   );
 };
 
-export default MailForm;
+export default AuthForm;

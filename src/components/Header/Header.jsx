@@ -51,11 +51,14 @@ const Header = () => {
              Додати оголошення
            </button>
            </Link>
-       <div className={styles.info}>
+           {/* <Link to = {ROUTES.MAILFORM}>
+            <button className={styles.button}>Register</button>
+          </Link> */}
+        <div className={styles.info}>
         <div className={styles.user} onClick={handleClick}>
        <div className={styles.avatar} style={{ backgroundImage: `url(${values.avatar})` }} />
        <div className={styles.username}>{values.name}</div>
-        </div>
+        </div> 
         <form className={styles.form}>
           <div className={styles.icon}>
             <svg className="icon">
@@ -119,6 +122,7 @@ const Header = () => {
         </div>
         </div>
         </div>
+        
         
   
          
