@@ -17,7 +17,7 @@
 }
 
 .buttoreg {
-  margin-left: 15px;
+  margin-right: 25px;
 }
 
 .user {
@@ -25,10 +25,11 @@
   align-items: center;
   column-gap: 10px;
   cursor: pointer;
+  margin-right: 25px;
 }
 
 .button {
-  margin-right: 25px;
+  margin-right: 40px;
 }
 
 
@@ -87,6 +88,7 @@
   background: none;
   outline: none;
   width: 100%;
+  
   
 }
 

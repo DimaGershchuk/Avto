@@ -52,6 +52,6 @@ const productsSlice = createSlice({
 
 });
 
-export const { filterByPrice, getRelatedProducts} = productsSlice.actions;
+export const { filterByPrice} = productsSlice.actions;
 
 export default productsSlice.reducer;

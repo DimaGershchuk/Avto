@@ -11,7 +11,7 @@ const Poster = () => (
       <div className={styles.text}>
         <div className={styles.subtitle}>the bestseller of 2022</div>
         <h1 className={styles.head}>Buy car now!</h1>
-        <button className={styles.button}>Shop Now</button>
+        {/* <button className={styles.button}>Shop Now</button> */}
       </div>
     </div>
   </section>

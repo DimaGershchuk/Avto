@@ -9,6 +9,7 @@
   gap: 20px;
   width: 100%;
   margin-top: 24px;
+ 
 }
 
 .filter {
@@ -37,6 +38,7 @@
   line-height: 16px;
   color: var(--dark-sea);
   text-align: right;
+  margin-left: 20px;
 }
 
 .more {

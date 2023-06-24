@@ -84,22 +84,13 @@ const Category = () => {
       <form className={styles.filters} onSubmit={handleSubmit}>
         <div className={styles.filter}>
           <input
-            type="text"
-            name="title"
-            onChange={handleChange}
-            placeholder="Product name"
-            value={values.type}
-          />
-        </div>
-        <div className={styles.filter}>
-          <input
             type="number"
             name="price_min"
             onChange={handleChange}
             placeholder="0"
             value={values.price_min}
           />
-          <span>Price from</span>
+          <span>Мінімальна ціна</span>
         </div>
         <div className={styles.filter}>
           <input
@@ -109,7 +100,7 @@ const Category = () => {
             placeholder="0"
             value={values.price_max}
           />
-          <span>Price to</span>
+          <span>Максимальна ціна</span>
         </div>
 
         <button type="submit" hidden />

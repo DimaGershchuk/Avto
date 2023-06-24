@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   return (
     <section className={styles.sidebar}>
-      <div className={styles.title}>CATEGORIES</div>
+      <div className={styles.title}>Категорії</div>
       <nav>
         <ul className={styles.menu}>
           {list.map(({ id, type }) => (
@@ -27,19 +27,7 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      <div className={styles.footer}>
-        <a href="/help" target="_blank" className={styles.link}>
-          Help
-        </a>
-        <a
-          href="/terms"
-          target="_blank"
-          className={styles.link}
-          style={{ textDecoration: "underline" }}
-        >
-          Terms & Conditions
-        </a>
-      </div>
+      
     </section>
   );
 };

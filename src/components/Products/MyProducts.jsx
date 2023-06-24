@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "../../styles/Products.module.css";
+import styles from "../../styles/Product.module.css";
 import { Link } from "react-router-dom";
 import AVATAR from "../../images/avatar.jpg";
 
 const Home = () => {
     const { currentUser, cart } = useSelector(({ user }) => user);
-    const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+    const [values, setValues] = useState({ name: "Гість", avatar: AVATAR });
 
     useEffect(() => {
         if (!currentUser) return;
@@ -69,7 +69,7 @@ const Home = () => {
             <section className="Products_products__TMsTJ">
                 <div className={styles.list}>
                     {list.map(
-                        ({ auto_id, mark, model, id, image, type_id, price }) => (
+                        ({ auto_id, mark, year, model, id, engine, image, description, type_id, price }) => (
                             <div key={auto_id} className={styles.product}>
                                 <Link to={`/auto/${auto_id}`} className={styles.imageLink}>
                                     <div
@@ -81,30 +81,23 @@ const Home = () => {
                                 <div className={styles.wrapper}>
                                     <h3 className={styles.title}>{mark}</h3>
                                     <h3 className={styles.title}>{model}</h3>
-                                    <div className={styles.cat}>{type_id}</div>
                                     <div className={styles.info}>
-                                        <div className={styles.prices}>
-                                            <div className={styles.price}>{price}$</div>
-                                            <div className={styles.oldPrice}>
-                                                {Math.floor(price * 0.8)}$
-                                            </div>
-                                        </div>
-
-                                        <div className={styles.purchases}>
-                                            {Math.floor(Math.random() * 20 + 1)} purchased
-                                        </div>
+                                    <div className={styles.price}>Ціна : {price}$</div>
+                                    <div className={styles.year}>Рік : {year}</div>
+                                    <div className={styles.price}>Об'єм двигуна : {engine}</div>
+                                    <div className={styles.description}>Опис : {description}</div>   
                                     </div>
 
                                     <div className={styles.buttons}>
                                         <button
-                                            className={styles.editButton}
+                                            className={styles.add}
                                             onClick={() => handleEditCar(auto_id)}
                                         >
                                             Edit
                                         </button>
                                         <>⠀⠀⠀</>
                                         <button
-                                            className={styles.deleteButton}
+                                            className={styles.add}
                                             onClick={() => handleDeleteCar(auto_id)}
                                         >
                                             Delete

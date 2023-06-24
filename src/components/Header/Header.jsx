@@ -21,7 +21,7 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const {currentUser, cart} = useSelector(({user}) => user)
 
-  const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+  const [values, setValues] = useState({ name: "Гість", avatar: AVATAR });
 
   const { data, isLoading } = useGetProductsQuery({ model: searchValue })
 
@@ -46,14 +46,14 @@ const Header = () => {
           <img src={LOGO} alt="Stuff" />
         </Link>
       </div>
-        {values.name !== "Guest" && (
+        {values.name !== "Гість" && (
             <Link to = {ROUTES.POSTAUTO}>
                 <button className={styles.button}>
                     Додати оголошення
                 </button>
             </Link>
         )}
-        {values.name !== "Guest" && (
+        {values.name !== "Гість" && (
             <Link to = {ROUTES.MYPRODUCTS}>
                 <button className={styles.button}>
                     Перегляд оголошень
@@ -86,7 +86,7 @@ const Header = () => {
             <input
               type="search"
               name="search"
-              placeholder="Search for anyting..."
+              placeholder="Пошук автомобіля..."
               autoComplete="off"
               onChange={handleSearch}
               value={searchValue}  

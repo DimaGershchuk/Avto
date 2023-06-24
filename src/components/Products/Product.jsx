@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { ROUTES } from "../../utils/routes";
 
@@ -9,28 +9,37 @@ import AVATAR from "../../images/bmw.jpeg";
 
 import { addItemToCart } from "../../features/user/userSlice";
 
-
 const Product = (item) => {
-  const { mark, price, color, model, image, description, year, engine } = item;
+  const { mark, price, color, model, image, description, year, engine, auto_id } = item;
 
   const dispatch = useDispatch();
-
+  const { cart, currentUser } = useSelector(({ user }) => user);
   const [currentImage, setCurrentImage] = useState();
   const [currentSize, setCurrentSize] = useState();
+  const [showMessage, setShowMessage] = useState(false);
 
-  
+  const handleBuyCar = () => {
+    if (currentUser) {
+      const selectedAutoId = auto_id; // Обраний id автомобіля
+      const url = `https://t.me/CarSe11erBot?start=${selectedAutoId}`;
+      window.open(url, "_blank");
+    } else {
+      setShowMessage(true);
+    }
+  };
 
   const addToCart = () => {
-    dispatch(addItemToCart(item));
+    if (currentUser) {
+      dispatch(addItemToCart(item));
+    } else {
+      setShowMessage(true);
+    }
   };
 
   return (
     <section className={styles.product}>
       <div className={styles.images}>
-        <div
-          className={styles.current}
-          style={{ backgroundImage: `url(${image})` }}
-        />
+        <div className={styles.current} style={{ backgroundImage: `url(${image})` }} />
         {/* <div className={styles["images-list"]}>
           {images.map((image, i) => (
             <div
@@ -39,8 +48,8 @@ const Product = (item) => {
               style={{ backgroundImage: `url(${image})` }}
               onClick={() => setCurrentImage(image)}
             />
-          ))} */}
-        {/* </div>  */}
+          ))}
+        </div> */}
       </div>
       <div className={styles.info}>
         <h1 className={styles.title}>{mark}</h1>
@@ -54,20 +63,23 @@ const Product = (item) => {
         <p className={styles.description}>{description}</p>
 
         <div className={styles.actions}>
-          <button
-            onClick={addToCart}
-            className={styles.add}
-          >
-            Add to favourites
+          <button onClick={addToCart} className={styles.add}>
+            Додати до улюблених
           </button>
-          {/* <button className={styles.favourite}>Add to favourites</button> */}
+          <button className={styles.add} onClick={handleBuyCar}>
+            Придбати авто
+          </button>
         </div>
 
-        <div className={styles.bottom}>
-          <div className={styles.purchase}>19 people purchased</div>
+        {showMessage && !currentUser && (
+          <div className={styles.message}>
+            Ви не зареєстровані. Будь ласка,{" "}
+            <Link to={ROUTES.LOGIN}>увійдіть</Link> або{" "}
+            <Link to={ROUTES.REGISTER}>зареєструйтесь</Link>, щоб продовжити.
+          </div>
+        )}
 
-          <Link to={ROUTES.HOME}>Return to store</Link>
-        </div>
+        
       </div>
     </section>
   );

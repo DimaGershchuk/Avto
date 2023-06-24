@@ -75,8 +75,8 @@ const CarStatistics = () => {
                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                         <thead>
                         <tr>
-                            <th style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>Марка</th>
-                            <th style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>Кількість</th>
+                            <th style={{ padding: '20px',  borderBottom: '1px solid #ccc' }}>Марка</th>
+                            <th style={{ padding: '20px', borderBottom: '1px solid #ccc' }}>Кількість</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,7 +96,7 @@ const CarStatistics = () => {
                         <thead>
                         <tr>
                             <th style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>Марка</th>
-                            <th style={{ padding: '10px', borderBottom: '1px solid #ccc', whiteSpace: 'nowrap' }}>
+                            <th style={{ padding: '20px', borderBottom: '1px solid #ccc', whiteSpace: 'nowrap' }}>
                                 Середня ціна
                             </th>
                         </tr>

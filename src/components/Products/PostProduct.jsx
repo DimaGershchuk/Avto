@@ -9,7 +9,7 @@ import AVATAR from "../../images/avatar.jpg";
 
 const AddCarForm = () => {
     const {currentUser, cart} = useSelector(({user}) => user)
-    const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
+    const [values, setValues] = useState({ name: "Гість", avatar: AVATAR });
 
     useEffect(() => {
         if (!currentUser) return;
