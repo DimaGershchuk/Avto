@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/Product.module.css";
 import { Link } from "react-router-dom";
 import AVATAR from "../../images/avatar.jpg";
+import {ROUTES} from "../../utils/routes";
 
 const Home = () => {
     const { currentUser, cart } = useSelector(({ user }) => user);
@@ -41,6 +42,8 @@ const Home = () => {
     const handleEditCar = (carId) => {
         // Обробник події редагування автомобіля
         console.log("Edit car with ID:", carId);
+        // Навігація на сторінку редагування автомобіля, використовуючи carId
+        // Наприклад, history.push(`/edit-car/${carId}`);
     };
 
     const handleDeleteCar = async (carId) => {
@@ -64,6 +67,36 @@ const Home = () => {
         }
     };
 
+    const handleSaveCar = async (carId, updatedData) => {
+        try {
+            const response = await fetch(
+                `https://prettyprinted-flask-app-demo-ewf3.onrender.com/auto/${carId}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updatedData),
+                }
+            );
+
+            if (response.ok) {
+                // Оновити дані автомобіля в списку
+                const updatedList = list.map((car) => {
+                    if (car.auto_id === carId) {
+                        return { ...car, ...updatedData };
+                    }
+                    return car;
+                });
+                setList(updatedList);
+            } else {
+                console.error("Update car request failed.");
+            }
+        } catch (error) {
+            console.error("Error updating car:", error);
+        }
+    };
+
     return (
         <>
             <section className="Products_products__TMsTJ">
@@ -82,19 +115,18 @@ const Home = () => {
                                     <h3 className={styles.title}>{mark}</h3>
                                     <h3 className={styles.title}>{model}</h3>
                                     <div className={styles.info}>
-                                    <div className={styles.price}>Ціна : {price}$</div>
-                                    <div className={styles.year}>Рік : {year}</div>
-                                    <div className={styles.price}>Об'єм двигуна : {engine}</div>
-                                    <div className={styles.description}>Опис : {description}</div>   
+                                        <div className={styles.price}>Ціна : {price}$</div>
+                                        <div className={styles.year}>Рік : {year}</div>
+                                        <div className={styles.price}>Об'єм двигуна : {engine}</div>
+                                        <div className={styles.description}>Опис : {description}</div>
                                     </div>
 
                                     <div className={styles.buttons}>
-                                        <button
-                                            className={styles.add}
-                                            onClick={() => handleEditCar(auto_id)}
-                                        >
-                                            Edit
-                                        </button>
+                                        <Link to={`/editcar/${auto_id}`}>
+                                            <button className={styles.button}>
+                                                EDIT
+                                            </button>
+                                        </Link>
                                         <>⠀⠀⠀</>
                                         <button
                                             className={styles.add}

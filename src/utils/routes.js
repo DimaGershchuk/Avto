@@ -7,5 +7,6 @@ export const ROUTES = {
   POSTAUTO : "/postauto",
   MAILFORM : "/mailform",
   STATS: "/stats",
-  MYPRODUCTS: "/myproducts"
+  MYPRODUCTS: "/myproducts",
+  EDITCAR: "/editcar/:id"
 };

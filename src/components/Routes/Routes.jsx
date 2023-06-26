@@ -10,6 +10,7 @@ import Cart from "../Cart/Cart";
 import PostProduct from "../Products/PostProduct";
 import Statistic from "../Products/Statistic";
 import MyProducts from "../Products/MyProducts";
+import EditCar from "../Products/EditProduct";
 
 const AppRoutes = () => (
   <Routes>
@@ -20,6 +21,7 @@ const AppRoutes = () => (
     <Route path={ROUTES.POSTAUTO} element={<PostProduct/>} />
     <Route path={ROUTES.STATS} element={<Statistic/>} />
     <Route path={ROUTES.MYPRODUCTS} element={<MyProducts/>} />
+    <Route path={ROUTES.EDITCAR} element={<EditCar/>} />
   </Routes>
 );
 
